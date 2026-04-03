@@ -126,6 +126,7 @@ Immune kill rate divided by tumour growth rate. The ratio of two dissipative sys
   title  = {FULCRUM: Predicting immunotherapy response from the
             structural theory of dissipative systems},
   year   = {2026},
+  doi    = {10.5281/zenodo.19399587},
   url    = {https://www.generativegeometry.science/fulcrum}
 }
 ```
