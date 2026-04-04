@@ -14,11 +14,11 @@ from fulcrum import report_bulk
 # Score a patient from bulk gene expression (log2 TPM+1)
 report = report_bulk(gzmb=5.2, prf1=4.8, ifng=3.1, gzma=5.5, mki67=4.9)
 
-print(report['score'])           # 13.7
-print(report['prediction'])      # 'likely responder'
-print(report['balance'])         # 'immune system is outpacing the tumour'
+print(report['score'])            # 13.7
+print(report['prediction'])       # 'likely responder'
+print(report['balance'])          # 'immune system is outpacing the tumour'
 print(report['weakest_effector']) # 'IFNG'
-print(report['interpretation'])  # Full plain-language report
+print(report['interpretation'])   # Full plain-language report
 ```
 
 ## Three models
@@ -35,6 +35,31 @@ print(report['interpretation'])  # Full plain-language report
 - **Returns a diagnosis**, not just a number — effector profile, tumour aggression, balance, bottleneck identification, regime classification
 - **6 structural features match 51-feature ML** across three cancer types
 - **Regime diagnosis** — explains *why* a biomarker fails in a specific cancer type
+- **Beats state-of-the-art benchmarks** on their own data with 5 genes and no training
+
+## The formula
+
+The core structural formula from Generative Geometry:
+
+```
+M_eff = M × (1−D) / (1+D)
+```
+
+Applied to bulk immunology:
+
+```
+score = log₂(GZMB) + log₂(PRF1) + log₂(IFNG) + log₂(GZMA) − log₂(MKI67)
+```
+
+Immune kill rate divided by tumour growth rate. The ratio of two dissipative systems.
+
+Applied at single-cell resolution (FULCRUM-S):
+
+```
+M_eff = (1−D) / (1+D) × (1+S)
+```
+
+where D = Treg + exhausted CD8 fraction (drain) and S = NK fraction (surveillance). Two patient measurements. Zero machine learning.
 
 ## Report functions
 
@@ -73,70 +98,55 @@ Using `dataset='bassez'` ensures reproducible results. See `FULCRUM_REPRODUCIBIL
 
 ## Validated results
 
+### Head-to-head against state of the art (bulk)
+
+FULCRUM has been compared against the two largest transcriptomic ICI prediction frameworks on their own data:
+
+| Comparison | Cohorts | FULCRUM | Benchmark | FULCRUM genes | Benchmark genes |
+|------------|---------|---------|-----------|---------------|-----------------|
+| vs EXPRESSO-B (melanoma) | 8 | 0.710 | 0.710 | 5 | whole transcriptome |
+| vs EXPRESSO-T (non-melanoma) | 7 | 0.768 | 0.720 | 5 | whole transcriptome |
+| vs TIME_ACT (shared cohorts) | 8 | 0.825 | 0.794 | 5 | 66 |
+
+EXPRESSO: Pal, Ruppin et al. (2025). bioRxiv 10.1101/2025.10.24.684491v2. Supervised LASSO trained on 69 cohorts, 3,729 patients.
+TIME_ACT: Mukherjee, Ruppin et al. (2025). bioRxiv 10.1101/2025.06.27.661875v2. Unsupervised 66-gene signature.
+
 ### Pan-cancer survival (TCGA, n=9,966, 33 cancer types)
-FULCRUM HR = 0.935, p = 0.0002. The only immune score significantly protective pan-cancer. CYT, IFN-γ, and GEP all fail.
+
+FULCRUM HR = 0.935, p = 0.0002. The only immune score significantly protective pan-cancer. CYT, IFN-γ, and GEP all fail (all p > 0.1). Removing the MKI67 denominator renders the same four genes non-significant (p = 0.402).
 
 ### Immunotherapy response (13 datasets, ~1,400 patients)
-Correct direction (hi = respond) on 12/13 ICI datasets across 6 cancer types.
+
+Correct direction (high score = respond) on 12/13 ICI datasets across 6 cancer types. AUC range 0.530–0.847.
 
 ### Single-cell head-to-head (3 datasets, 290 patients)
+
 | Dataset | FULCRUM-S+ (6 feat) | Full ML | Full ML features |
-|---------|--------------------:|--------:|-----------------:|
+|---------|---------------------|---------|------------------|
 | Zhang NSCLC (n=242) | 0.770 | 0.762 | 51 |
 | Sade-Feldman Melanoma (n=19) | 0.889 | 0.922 | 30 |
 | Bassez Breast (n=29) | 0.922 | 0.843 | 16 |
 
 Same patients, same folds, same seed. Protocol: repeated stratified 5-fold CV, 200 repeats, seed=42, C=1.0.
 
-### Patient-level (no ML)
-Zhang NSCLC AUC 0.808 (vs oncologist 0.72, PD-L1 0.64).
+### Patient-level prediction (no ML)
 
-## Repository structure
+| Dataset | Cancer | n | AUC | Comparison |
+|---------|--------|---|-----|------------|
+| Zhang 2025 | NSCLC | 159 | 0.808 | Oncologist: 0.72, PD-L1: 0.64 |
+| Sade-Feldman 2018 | Melanoma | 19 | 0.889 | — |
+| Yost 2019 | BCC | 11 | 0.767 | — |
 
-```
-fulcrum.py                          # The package — all formulas + report functions
-FULCRUM_REPRODUCIBILITY_SPEC.md     # Locked protocol for all reported results
-data/
-  bassez_cell_fractions.json        # Processed Bassez fractions (n=29)
-  zhang_cell_fractions_fulcrum.json  # Processed Zhang fractions (n=242)
-notebooks/                          # Jupyter notebooks reproducing all results
-```
+Two cell-type measurements per patient. Zero machine learning.
 
-## The formula
+## FULCRUM-S Scorer (`fulcrum_s_scorer.py`)
 
-The core structural formula from Generative Geometry:
+Standalone command-line tool for scoring any h5ad file with cell type annotations and patient response labels.
 
-```
-M_eff = M × (1−D) / (1+D)
-```
+### Quick start
 
-Applied to immunology:
-
-```
-score = log₂(GZMB) + log₂(PRF1) + log₂(IFNG) + log₂(GZMA) − log₂(MKI67)
-```
-
-Immune kill rate divided by tumour growth rate. The ratio of two dissipative systems.
-
-## Citation
-
-```bibtex
-@article{vanderklein2026fulcrum,
-  author = {van der Klein, Raimo},
-  title  = {FULCRUM: Predicting immunotherapy response from the
-            structural theory of dissipative systems},
-  year   = {2026},
-  doi    = {10.5281/zenodo.19399587},
-  url    = {https://www.generativegeometry.science/fulcrum}
-}
-```
-FULCRUM-S Scorer (fulcrum_s_scorer.py)
-Patient-level immunotherapy response prediction from scRNA-seq data.
-What it does
-Takes any h5ad file with cell type annotations and patient response labels, maps cell types to FULCRUM structural positions, and computes M_eff = (1−D)/(1+D) × (1+S) per patient — where D is the drain (Treg + exhausted CD8 fraction) and S is the surveillance signal (NK fraction). Two measurements per patient, zero machine learning, zero fitted parameters.
-Also classifies each patient's regime (quality-limited vs abundance-limited) and reports AUC overall and by regime.
-Quick start
-bashpip install scanpy   # or: pip install h5py pandas numpy
+```bash
+pip install scanpy   # or: pip install h5py pandas numpy
 
 # Auto-detect columns:
 python fulcrum_s_scorer.py my_dataset.h5ad
@@ -150,20 +160,68 @@ python fulcrum_s_scorer.py my_dataset.h5ad --all-timepoints
 
 # Custom output:
 python fulcrum_s_scorer.py my_dataset.h5ad -o results.csv
-Using with the Gondal integrated ICB database
-The integrated ICB scRNA-seq dataset (Gondal et al., Scientific Data 2025) covers 9 cancer types and 223 patients with cell type annotations and ICB response labels.
-bash# Download (~3 GB):
+```
+
+### Using with the Gondal integrated ICB database
+
+The [integrated ICB scRNA-seq dataset](https://cellxgene.cziscience.com/collections/61e422dd-c9cd-460e-9b91-72d9517348ef) (Gondal et al., Scientific Data 2025) covers 9 cancer types and 223 patients.
+
+```bash
+# Download (~3 GB):
 wget "https://datasets.cellxgene.cziscience.com/134d34af-cbcd-4837-9310-3d1f83ec6f18.h5ad" \
     -O gondal_icb.h5ad
 
 # Score all cancer types:
 python fulcrum_s_scorer.py gondal_icb.h5ad -o gondal_results.csv
-Cell type mapping
+```
+
+### Cell type mapping
+
 The scorer maps ~60 common annotation labels to five structural positions:
-PositionRoleExample labelsNKDetection/surveillanceNK cell, Natural Killer, NKTCD8_effectorKill capacityCD8_Teff, Cytotoxic T, CD8_GZMB+CD8_exhaustedEncounter drainCD8_Tex, dysfunctional CD8, CD8_HAVCR2+TregSuppressive drainTreg, regulatory T, FOXP3+CD8_memoryRenewal capacityCD8_Tcm, stem-like CD8, CD8_TCF7+
-Unmapped cell types are reported. To add custom mappings, edit the STRUCTURAL_POSITIONS dictionary.
-Validated results
-DatasetCancernAUCComparisonZhang 2025NSCLC1590.808Oncologist: 0.72, PD-L1: 0.64Sade-Feldman 2018Melanoma190.889—Yost 2019BCC110.767—Bassez 2021Breast290.922Full ML (16 feat): 0.843
+
+| Position | Role | Example labels |
+|----------|------|---------------|
+| NK | Detection/surveillance | NK cell, Natural Killer, NKT |
+| CD8_effector | Kill capacity | CD8_Teff, Cytotoxic T, CD8_GZMB+ |
+| CD8_exhausted | Encounter drain | CD8_Tex, dysfunctional CD8, CD8_HAVCR2+ |
+| Treg | Suppressive drain | Treg, regulatory T, FOXP3+ |
+| CD8_memory | Renewal capacity | CD8_Tcm, stem-like CD8, CD8_TCF7+ |
+
+Unmapped cell types are reported. To add custom mappings, edit the `STRUCTURAL_POSITIONS` dictionary in `fulcrum_s_scorer.py`.
+
+## Repository structure
+
+```
+fulcrum.py                          # The package — all formulas + report functions
+fulcrum_s_scorer.py                 # CLI tool for scoring h5ad files
+FULCRUM_REPRODUCIBILITY_SPEC.md     # Locked protocol for all reported results
+bassez_cell_fractions.json          # Processed Bassez fractions (n=29)
+sade_feldman_cell_fractions.json    # Processed Sade-Feldman fractions (n=19)
+zhang_cell_fractions.json           # Zhang patient metadata (n=243)
+notebooks/                          # Jupyter notebooks reproducing all results
+```
+
+## Citation
+
+```bibtex
+@article{vanderklein2026fulcrum,
+  author = {van der Klein, Raimo},
+  title  = {FULCRUM: Predicting immunotherapy response from the
+            structural theory of dissipative systems},
+  year   = {2026},
+  doi    = {10.5281/zenodo.19399587},
+  url    = {https://www.generativegeometry.science/fulcrum}
+}
+```
+
+## References
+
+- FULCRUM paper: van der Klein R (2026). Zenodo [10.5281/zenodo.19399587](https://doi.org/10.5281/zenodo.19399587)
+- Generative Geometry: van der Klein R (2026). [generativegeometry.science](https://www.generativegeometry.science)
+- EXPRESSO: Pal, Ruppin et al. (2025). bioRxiv [10.1101/2025.10.24.684491v2](https://doi.org/10.1101/2025.10.24.684491v2)
+- TIME_ACT: Mukherjee, Ruppin et al. (2025). bioRxiv [10.1101/2025.06.27.661875v2](https://doi.org/10.1101/2025.06.27.661875v2)
+- Zhang NSCLC: Liu, Yang et al. (2025). Cell 188:3081–3096
+- Thorsson immune landscape: Thorsson et al. (2018). Immunity 48:812–830
 
 ## Status
 
@@ -171,8 +229,8 @@ FULCRUM is pre-publication. The paper is in preparation. All code, data, and res
 
 ## License
 
-MIT
+All Rights Reserved. © 2026 Raimo van der Klein.
 
 ## Author
 
-Raimo van der Klein · [generativegeometry.science](https://www.generativegeometry.science)
+Raimo van der Klein · [generativegeometry.science](https://www.generativegeometry.science) · raimo@generativegeometry.science
