@@ -130,6 +130,40 @@ Immune kill rate divided by tumour growth rate. The ratio of two dissipative sys
   url    = {https://www.generativegeometry.science/fulcrum}
 }
 ```
+FULCRUM-S Scorer (fulcrum_s_scorer.py)
+Patient-level immunotherapy response prediction from scRNA-seq data.
+What it does
+Takes any h5ad file with cell type annotations and patient response labels, maps cell types to FULCRUM structural positions, and computes M_eff = (1−D)/(1+D) × (1+S) per patient — where D is the drain (Treg + exhausted CD8 fraction) and S is the surveillance signal (NK fraction). Two measurements per patient, zero machine learning, zero fitted parameters.
+Also classifies each patient's regime (quality-limited vs abundance-limited) and reports AUC overall and by regime.
+Quick start
+bashpip install scanpy   # or: pip install h5py pandas numpy
+
+# Auto-detect columns:
+python fulcrum_s_scorer.py my_dataset.h5ad
+
+# Specify columns:
+python fulcrum_s_scorer.py my_dataset.h5ad \
+    --patient donor_id --celltype cell_type --response outcome
+
+# Include post-treatment samples:
+python fulcrum_s_scorer.py my_dataset.h5ad --all-timepoints
+
+# Custom output:
+python fulcrum_s_scorer.py my_dataset.h5ad -o results.csv
+Using with the Gondal integrated ICB database
+The integrated ICB scRNA-seq dataset (Gondal et al., Scientific Data 2025) covers 9 cancer types and 223 patients with cell type annotations and ICB response labels.
+bash# Download (~3 GB):
+wget "https://datasets.cellxgene.cziscience.com/134d34af-cbcd-4837-9310-3d1f83ec6f18.h5ad" \
+    -O gondal_icb.h5ad
+
+# Score all cancer types:
+python fulcrum_s_scorer.py gondal_icb.h5ad -o gondal_results.csv
+Cell type mapping
+The scorer maps ~60 common annotation labels to five structural positions:
+PositionRoleExample labelsNKDetection/surveillanceNK cell, Natural Killer, NKTCD8_effectorKill capacityCD8_Teff, Cytotoxic T, CD8_GZMB+CD8_exhaustedEncounter drainCD8_Tex, dysfunctional CD8, CD8_HAVCR2+TregSuppressive drainTreg, regulatory T, FOXP3+CD8_memoryRenewal capacityCD8_Tcm, stem-like CD8, CD8_TCF7+
+Unmapped cell types are reported. To add custom mappings, edit the STRUCTURAL_POSITIONS dictionary.
+Validated results
+DatasetCancernAUCComparisonZhang 2025NSCLC1590.808Oncologist: 0.72, PD-L1: 0.64Sade-Feldman 2018Melanoma190.889—Yost 2019BCC110.767—Bassez 2021Breast290.922Full ML (16 feat): 0.843
 
 ## Status
 
