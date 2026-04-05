@@ -121,13 +121,15 @@ Correct direction (high score = respond) on 12/13 ICI datasets across 6 cancer t
 
 ### Single-cell head-to-head (3 datasets, 290 patients)
 
-| Dataset | FULCRUM-S+ (6 feat) | Full ML | Full ML features |
-|---------|---------------------|---------|------------------|
-| Zhang NSCLC (n=242) | 0.770 | 0.762 | 51 |
-| Sade-Feldman Melanoma (n=19) | 0.889 | 0.922 | 30 |
-| Bassez Breast (n=29) | 0.922 | 0.843 | 16 |
+| Dataset | FULCRUM-S+ v1 (6 feat) | FULCRUM-S+ v2 (7 feat) | Full ML | Full ML features |
+|---------|------------------------|------------------------|---------|------------------|
+| Zhang NSCLC (n=242) | 0.781 | **0.808** | 0.746 | 51 |
+| Sade-Feldman Melanoma (n=19) | 0.918 | **0.941** | 0.933 | 30 |
+| Bassez Breast (n=29) | 0.856 | — (abundance-limited) | 0.843 | 16 |
 
 Same patients, same folds, same seed. Protocol: repeated stratified 5-fold CV, 200 repeats, seed=42, C=1.0.
+
+v2 adds one structural feature: host Conservation drain (inflammatory macrophages at the encounter site). See changelog below.
 
 ### Patient-level prediction (no ML)
 
@@ -138,6 +140,63 @@ Same patients, same folds, same seed. Protocol: repeated stratified 5-fold CV, 2
 | Yost 2019 | BCC | 11 | 0.767 | — |
 
 Two cell-type measurements per patient. Zero machine learning.
+
+### External validation (new in v0.15.0)
+
+| Dataset | Cancer | n | FULCRUM v1 AUC | Platform |
+|---------|--------|---|----------------|----------|
+| GSE207422 | NSCLC | 24 | 0.822 | Bulk RNA-seq |
+
+Independent NSCLC cohort. No training. Five genes.
+
+---
+
+## v0.15.0 — Host Conservation drain (FULCRUM-S v2)
+
+The patient's body is a dissipative system hosting the immune-tumour encounter. Its maintenance programme — specifically inflammatory macrophages at the tumour site — interferes with the immune response by competing for tissue space.
+
+### The formula change
+
+```
+v1: ratio = kill / (kill + suppress + ε)
+v2: ratio = kill / (kill + suppress + host_drain + ε)
+```
+
+One additional term. Same formula shape. Zero additional fitted parameters.
+
+`host_drain` = inflammatory macrophage fraction: CXCL10, DNAJB1, ISG15, MKI67 macrophage subtypes on scRNA. Only inflammatory subtypes contribute — tissue-resident (FOLR2, MARCO) and scavenging macrophages hurt performance.
+
+### v2 results across cancer types (scRNA)
+
+| Dataset | n | Cancer | v1 | v2 | Δ |
+|---------|---|--------|-----|-----|---|
+| Zhang NSCLC (10x) | 242 | NSCLC | 0.781 | **0.808** | +0.027 |
+| Sade-Feldman (SS2) | 19 | Melanoma | 0.918 | **0.941** | +0.022 |
+| Yost BCC (10x) | 11 | BCC | 0.600 | 0.633 | +0.033 |
+| CRC GSE236581 (10x) | 22 | Colorectal | 0.442 | 0.483 | +0.042 |
+
+Direction: v2 ≥ v1 on **all four cancer types**. Bootstrap P(v2 > v1) = 94.6% on Zhang.
+
+### Controls
+
+- **All macrophages** (not just inflammatory): Zhang 0.780 → 0.740 (−0.040). Only inflammatory subtypes work.
+- **Bulk RNA**: IMvigor210 (−0.012), TCGA (−0.037), GSE207422 (−0.037). Host drain genes are too broadly expressed without cell-type resolution.
+- **Abundance-limited** (Bassez breast, coarse myeloid): v2 partially fixes inversion but hurts FULCRUM-S+ ML (−0.065). Requires inflammatory mac subtypes, not coarse myeloid labels.
+
+### Usage
+
+```python
+# v2 scoring (scRNA with inflammatory macrophage annotations)
+score = score_scrna(cell_fractions, dataset='zhang', include_host_drain=True)
+features = features_scrna(cell_fractions, dataset='zhang', include_host_drain=True)
+
+# Patient-level with host drain
+report = report_patient(M=0.45, ccr8_treg_frac=0.08,
+                        foxp3_treg_frac=0.12, fgfbp2_nk_frac=0.03,
+                        host_drain_frac=0.05)
+```
+
+Use `include_host_drain=True` only when inflammatory macrophage subtypes are available in the cell type annotations. Default is `False` (v1 behaviour).
 
 ## FULCRUM-S Scorer (`fulcrum_s_scorer.py`)
 

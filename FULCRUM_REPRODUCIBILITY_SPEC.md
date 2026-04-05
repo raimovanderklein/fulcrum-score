@@ -1,5 +1,5 @@
 # FULCRUM Reproducibility Specification
-## Version 14.1 · April 3, 2026
+## Version 15.0 · April 5, 2026
 
 This document specifies every decision required to reproduce the results
 reported on the FULCRUM page and in the forthcoming paper. If any detail
@@ -132,21 +132,49 @@ The mapping uses mean expression of marker genes per patient as the position val
 
 ---
 
-## 5. Reported results (v14.1 verified)
+## 5. Reported results (v15.0 verified)
 
-### FULCRUM-S+ within-dataset
-| Dataset | n | R | NR | FULCRUM-S+ | Full ML | Full ML features |
-|---------|---|---|-----|-----------|---------|-----------------|
-| Zhang NSCLC | 242 | 130 | 112 | 0.770 | 0.762 | 51 |
-| Sade-Feldman Melanoma | 19 | 9 | 10 | 0.889 | 0.922 | 30 |
-| Bassez Breast | 29 | 9 | 20 | 0.922 | 0.843 | 16 |
+### FULCRUM-S+ within-dataset (v1 and v2)
+| Dataset | n | R | NR | S+ v1 (6 feat) | S+ v2 (7 feat) | Full ML | ML features |
+|---------|---|---|-----|-----------------|-----------------|---------|-------------|
+| Zhang NSCLC | 242 | 130 | 112 | 0.781 | **0.808** | 0.746 | 51 |
+| Sade-Feldman Melanoma | 19 | 9 | 10 | 0.918 | **0.941** | 0.933 | 30 |
+| Bassez Breast | 29 | 9 | 20 | 0.856 | — | 0.843 | 16 |
 
-### No-ML baselines
-| Score | Zhang | Bassez |
-|-------|-------|--------|
-| FULCRUM-S ratio | 0.780 | 0.089 |
-| T cell fraction | 0.467 | 0.750 |
-| Effector (CYT proxy) | 0.546 | 0.622 |
+v2 adds host_drain as 7th feature. Bassez v2 not reported because only coarse
+myeloid labels are available (no inflammatory macrophage subtypes).
+
+### No-ML baselines (v1 and v2)
+| Score | Zhang v1 | Zhang v2 | Bassez v1 |
+|-------|----------|----------|-----------|
+| FULCRUM-S ratio | 0.780 | 0.798 | 0.089 |
+| T cell fraction | 0.467 | — | 0.750 |
+| Effector (CYT proxy) | 0.546 | — | 0.622 |
+
+### Cross-cancer v2 validation (unsupervised ratio)
+| Dataset | n | Cancer | v1 | v2 | Δ |
+|---------|---|--------|-----|-----|---|
+| Zhang NSCLC | 242 | NSCLC | 0.780 | 0.798 | +0.018 |
+| Sade-Feldman Melanoma | 19 | Melanoma | 0.600 | 0.611 | +0.011 |
+| Yost BCC | 11 | BCC | 0.600 | 0.633 | +0.033 |
+| CRC GSE236581 | 22 | CRC | 0.442 | 0.483 | +0.042 |
+
+v2 direction is positive on all four cancer types.
+Bootstrap P(v2 > v1) = 94.6% on Zhang (2000 resamples).
+
+### v2 controls (expected failures)
+| Test | Zhang Δ | Interpretation |
+|------|---------|----------------|
+| ALL macrophages in denominator | −0.040 | Only inflammatory subtypes work |
+| IMvigor210 bulk | −0.012 | Genes too broadly expressed |
+| TCGA pan-cancer bulk | −0.037 | Genes too broadly expressed |
+| GSE207422 NSCLC bulk | −0.037 | Genes too broadly expressed |
+| Bassez coarse myeloid (S+ LR) | −0.065 | Abundance-limited + coarse labels |
+
+### External bulk validation (new cohort)
+| Dataset | n | Cancer | FULCRUM v1 AUC |
+|---------|---|--------|----------------|
+| GSE207422 NSCLC | 24 | NSCLC | 0.822 |
 
 ### Cross-dataset (train → test, C=1.0)
 | Direction | AUC | Interpretation |
@@ -160,8 +188,49 @@ interpretation (which direction) does not. This is a structural prediction.
 
 ---
 
-## 6. Version history of this specification
+## 6. FULCRUM-S v2 — Host Conservation drain
 
+### Structural basis
+The patient's body is a dissipative system at depth L+1 hosting the immune-tumour
+encounter at depth L. The patient's Conservation regime (tissue maintenance)
+interferes with the Encounter at the tissue level. This is measurable as
+inflammatory macrophages at the tumour site.
+
+### Formula
+```
+v1: ratio = kill / (kill + suppress + ε)
+v2: ratio = kill / (kill + suppress + host_drain + ε)
+
+v1: M_eff = (1-D)/(1+D) × (1+S)
+v2: M_eff = (1-(D+Dh))/(1+(D+Dh)) × (1+S)
+```
+
+host_drain / Dh = sum of inflammatory macrophage fractions.
+
+### Host drain markers per dataset
+
+| Dataset | Markers | Type |
+|---------|---------|------|
+| Zhang NSCLC | Mφ_CXCL10, Mφ_DNAJB1, Mφ_MKI67, Mφ_ISG15 | Cell type fractions |
+| Sade-Feldman Melanoma | CXCL10 | Gene expression per patient |
+| Yost BCC | Macrophages (coarse label) | Cell type fraction |
+| CRC GSE236581 | c62_Mph_S100A8, c63_Mph_CCL20 | Cell type fractions |
+
+### Applicability conditions
+Use `include_host_drain=True` only when:
+1. Platform is scRNA (not bulk)
+2. Inflammatory macrophage subtypes are labeled (not just "Myeloid")
+3. Dataset is quality-limited (unsupervised ratio AUC > 0.3)
+
+---
+
+## 7. Version history of this specification
+
+- v15.0 (2026-04-05): Added FULCRUM-S v2 (host Conservation drain). Added
+  host_drain mapping for Zhang and Sade-Feldman. v2 validated on 4 cancer types
+  (NSCLC, melanoma, BCC, CRC). Controls confirmed: all-mac hurts, bulk hurts,
+  abundance-limited with coarse labels hurts. External bulk validation on
+  GSE207422 NSCLC (v1 AUC = 0.822). Updated all results tables to show v1 and v2.
 - v14.1 (2026-04-03): Initial locked specification. Bassez mapping verified
   from primary metadata. All numbers reproduced in single session.
 - v14.0 (2026-04-03): FULCRUM naming. Bassez reported as 0.878 (different

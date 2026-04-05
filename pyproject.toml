@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fulcrum-score"
-version = "0.14.1"
+version = "0.15.0"
 description = "Immunotherapy response prediction framework derived from the structural theory of dissipative systems"
 readme = "README.md"
 license = {text = "MIT"}
