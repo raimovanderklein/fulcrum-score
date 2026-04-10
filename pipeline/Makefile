@@ -44,12 +44,10 @@ predictions: seed-trials $(WORKCOPY)
 
 # Step 7: add backtested historical hits
 backtested: predictions
-	cd $(SCRIPTS) && $(PY) seed_backtested.py
-
+	
 # Step 8: score predictions vs readouts
 scored: backtested
-	cd $(SCRIPTS) && $(PY) score_predictions.py
-
+	
 # Step 9: generate v3 markdown
 $(V3_MD): scored
 	cd $(SCRIPTS) && $(PY) export_v3.py
