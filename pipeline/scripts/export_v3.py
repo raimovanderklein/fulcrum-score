@@ -11,6 +11,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 # ─── Path resolution: locate sibling files relative to this script ───
 import os as _os
+
+# Single source of truth for Zenodo DOIs. Fail loud if unset.
+ZENODO_CONCEPT_DOI = "10.5281/zenodo.19408509"  # always-latest, cite this in papers
+ZENODO_VERSION_DOI = "10.5281/zenodo.19501136"  # v3 specific record
+ZENODO_V1_DOI = "10.5281/zenodo.19408510"
+ZENODO_V2_DOI = "10.5281/zenodo.19432232"
+assert all([ZENODO_CONCEPT_DOI, ZENODO_VERSION_DOI]), "DOI constants must be set"
+
 _HERE = Path(_os.path.dirname(_os.path.abspath(__file__)))
 _REPO = _HERE.parent
 _DATA = _REPO / 'data'
@@ -138,7 +146,16 @@ def main():
     md.append("")
     md.append(f"_Generated from `encounter.db` on {today}._")
     md.append("")
-    md.append("**Concept DOI:** [10.5281/zenodo.19399587](https://doi.org/10.5281/zenodo.19399587)")
+    md.append(f"**Concept DOI:** [{ZENODO_CONCEPT_DOI}](https://doi.org/{ZENODO_CONCEPT_DOI})")
+    md.append("")
+    md.append(f"**Version DOI (v3):** [{ZENODO_VERSION_DOI}](https://doi.org/{ZENODO_VERSION_DOI})")
+    md.append("")
+    md.append("## Contact")
+    md.append("")
+    md.append("- **Web:** https://encounter.bio")
+    md.append("- **Contact:** https://encounter.bio/contact")
+    md.append("- **Author:** Raimo van der Klein, founder of Encounter")
+    md.append("- **Framework:** Generative Geometry (van der Klein, 2026)")
     md.append("")
     md.append("## Errata to v1 (10.5281/zenodo.19408510) and v2 (10.5281/zenodo.19432232)")
     md.append("")

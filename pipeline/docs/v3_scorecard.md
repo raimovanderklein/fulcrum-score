@@ -2,7 +2,16 @@
 
 _Generated from `encounter.db` on April 10, 2026._
 
-**Concept DOI:** [10.5281/zenodo.19399587](https://doi.org/10.5281/zenodo.19399587)
+**Concept DOI:** [10.5281/zenodo.19408509](https://doi.org/10.5281/zenodo.19408509)
+
+**Version DOI (v3):** [10.5281/zenodo.19501136](https://doi.org/10.5281/zenodo.19501136)
+
+## Contact
+
+- **Web:** https://encounter.bio
+- **Contact:** https://encounter.bio/contact
+- **Author:** Raimo van der Klein, founder of Encounter
+- **Framework:** Generative Geometry (van der Klein, 2026)
 
 ## Errata to v1 (10.5281/zenodo.19408510) and v2 (10.5281/zenodo.19432232)
 

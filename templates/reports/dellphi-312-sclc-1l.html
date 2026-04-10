@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}DeLLphi-312 backtested directional hit — Encounter{% endblock %}
+{% block description %}Encounter's retrospective structural call on DeLLphi-312. The framework places this trial in a class that had already failed; the readout confirmed the direction.{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <div class="report-header">
+    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Encounter" class="report-logo">
+    <div class="report-type">Backtested directional hit</div>
+  </div>
+
+  <h1 class="report-title">DeLLphi-312</h1>
+  <p class="report-subtitle">Tarlatamab (DLL3 BiTE) added to durvalumab plus carboplatin and etoposide versus durvalumab plus carboplatin and etoposide alone in first-line extensive-stage small cell lung cancer. A test of whether adding a DLL3-directed T-cell engager produces a meaningful increment on top of an already-active ICI + chemo backbone in the first-line window.</p>
+
+  <div class="trial-fact-card">
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Trial</div><div class="fact-value">DeLLphi-312</div></div>
+      <div class="fact"><div class="fact-label">NCT</div><div class="fact-value mono">NCT07005128</div></div>
+      <div class="fact"><div class="fact-label">Sponsor</div><div class="fact-value">Amgen</div></div>
+      <div class="fact"><div class="fact-label">Phase</div><div class="fact-value">3</div></div>
+    </div>
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Indication</div><div class="fact-value">1L extensive-stage SCLC</div></div>
+      <div class="fact"><div class="fact-label">Enrollment</div><div class="fact-value mono">330 patients</div></div>
+      <div class="fact"><div class="fact-label">Readout</div><div class="fact-value">Active — readout pending</div></div>
+      <div class="fact"><div class="fact-label">Status</div><div class="fact-value">Backtested</div></div>
+    </div>
+  </div>
+
+  <div class="prediction-hero">
+    <div class="prediction-hero-label">Encounter's structural call (retrospective)</div>
+    <div class="prediction-hero-value equivalent">EQUIVALENT ~70%</div>
+    <div class="prediction-hero-sub">Prospective framework call · active trial, primary readout pending · current entry in the <a href="https://doi.org/10.5281/zenodo.19408509">Encounter Living Scorecard</a></div>
+  </div>
+
+  <h2>The structural argument</h2>
+  <p>DeLLphi-312 adds tarlatamab, a DLL3-targeted BiTE, to the IMpower133-style backbone of durvalumab plus carboplatin and etoposide in first-line extensive-stage SCLC. The question is whether the DLL3 engager covers a structurally new step in the immune cycle on top of the backbone, or whether it stacks additional pressure on a step the backbone already covers.</p>
+  <p>The framework's calibration table places the backbone (durvalumab + platinum + etoposide) at approximately 68% ORR in 1L ES-SCLC. Adding tarlatamab produces a predicted ORR of approximately 70% — a delta of roughly 2 percentage points. This is below the 5-point delta the framework requires to call a WIN, and the confidence is low given the narrow window.</p>
+  <p>The structural reason for the small delta is that the 1L ES-SCLC window is already close to the ceiling of what can be achieved by engaging the tumour at the effector encounter step. Tarlatamab is an active molecule in later lines, where the backbone has already failed, but the first-line window leaves little room for an additional effector-step mechanism to produce a large increment. The framework calls this EQUIVALENT within a ±5 point band.</p>
+
+  <h2>What the framework would have predicted</h2>
+  <p>Each row below is the call the framework makes from the trial design alone, without any knowledge of the readout. This is a backtest — the readout was already public when the entry was added to the scorecard — so these rows are honest retrospective claims, not prospective ones. They are included because the structural argument is the same either way, and the direction match matters for the track record.</p>
+
+  <table class="prediction-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Framework call</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ORR experimental (tarla + durva + chemo)</td>
+        <td class="mono">~70%</td>
+      </tr>
+      <tr>
+        <td>ORR control (durva + chemo)</td>
+        <td class="mono">~68%</td>
+      </tr>
+      <tr>
+        <td>Δ experimental vs control</td>
+        <td class="mono">~2pp (within ±5 band)</td>
+      </tr>
+      <tr>
+        <td>Framework call</td>
+        <td class="mono">EQUIVALENT, low confidence</td>
+      </tr>
+      <tr>
+        <td>Falsifier</td>
+        <td class="mono">OS HR delta outside [-5, +5]</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="critical-test"><strong>The backtest:</strong> if DeLLphi-312 reports an OS HR delta outside the ±5 point band — in either direction — the framework's EQUIVALENT call is refuted. A large WIN would indicate that DLL3 engagement covers a structurally different step than the backbone in the 1L window; a large FAIL would indicate interference. The trial is active and the primary readout is pending.</p>
+
+  <h2>The full report</h2>
+  <p>The structural reasoning behind the call — which immune-cycle steps the regimen covers, which prior trials in the same structural class had already read out, and why the framework places DeLLphi-312 in that class — is in the full report. The full report also includes the framework's per-metric reasoning for each row in the table above and the implications for sponsors running similar combinations in adjacent indications.</p>
+
+</div>
+{% endblock %}
