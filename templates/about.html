@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}About — Encounter{% endblock %}
+{% block description %}Encounter publishes prospective structural predictions on immunotherapy trials before they read out, and applies the same calculation as a service to trial designers evaluating new combinations.{% endblock %}
+
+{% block content %}
+<div class="page-wide">
+  <section style="margin-top: 24px;">
+    <div style="font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px;">About Encounter</div>
+    <h1>Prospective structural reads on immunotherapy trials.</h1>
+    <p style="font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--ink-2); line-height: 1.55; max-width: 640px; margin-bottom: 36px;">Encounter publishes prospective predictions on immunotherapy trials before they read out, and applies the same structural calculation as a service to clinical development teams evaluating new combinations.</p>
+
+    <h2 style="border-top: 1px solid var(--line); padding-top: 18px;">What we do</h2>
+    <p>Encounter does two things. First, we publish a <strong>living scorecard</strong> on Zenodo of structural predictions for ongoing immunotherapy trials. Each prediction is timestamped, falsifiable, and accompanied by the specific data pattern that would confirm or refute it. The scorecard is updated whenever a tracked trial reads out and whenever a new prediction is added. Predictions are never removed. Misses are retained and scored honestly.</p>
+    <p>Second, we offer the same structural calculation as a <strong>service to trial designers</strong>. If you are designing or evaluating an immuno-oncology trial, we apply the framework to your candidate population and your drug combination, and return a structural read on which patients sit upstream of where your drug acts and which sit past it &mdash; with arm-sizing implications, defensible enrolment criteria, and the source code that runs the calculation against your own pre-treatment bulk RNA-seq.</p>
+
+    <h2 style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 36px;">The principle</h2>
+    <p>All Encounter predictions derive from a single structural rule, the <strong>coverage principle</strong>: a drug combination's effectiveness depends on whether it covers the step where the immune response is currently held for that patient population &mdash; and on whether it adds coverage at steps the existing regimen leaves open. Two questions, not one. <em>Where is the immune cycle arrested?</em> and <em>Does the experimental arm address that arrest?</em></p>
+    <p>The immune-tumour interaction is modelled as a cycle with four coarse regimes &mdash; detection, priming, encounter, and maintenance &mdash; each of which can be the rate-limiting bottleneck depending on the tumour type and the prior treatment context. From this rule the directional prediction follows mechanically. If the experimental arm adds a drug at a step the control arm already covers, the addition does little. If the experimental arm covers a step the control regimen leaves open <em>and</em> that step is where the immune cycle is held, the addition does a great deal.</p>
+
+    <h2 style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 36px;">The framework</h2>
+    <p>Encounter is built on Generative Geometry, a structural framework for dissipative systems published as an open Zenodo preprint (van der Klein, 2026, <a href="https://doi.org/10.5281/zenodo.19007402">DOI 10.5281/zenodo.19007402</a>). The framework is the intellectual asset; Encounter is its application to one specific decision: which immunotherapy trials are structurally positioned to read out, and which are not.</p>
+
+    <h2 style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 36px;">Engagement</h2>
+    <p>Encounter quotes per engagement rather than per subscription. The <a href="{{ url_for('service') }}">service page</a> describes the deliverable, the process, and the lead time. The first conversation is always about whether the framework can answer the question you're asking &mdash; if it cannot, we will tell you, and there is no charge for that conversation.</p>
+
+    <h2 style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 36px;">Who</h2>
+    <p>Encounter is led by Raimo van der Klein, an independent researcher based in the Netherlands and the author of the Generative Geometry framework. Encounter works with sponsors, biotech, and CROs globally.</p>
+
+    <h2 style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 36px;">Contact</h2>
+    <p><a href="mailto:hello@encounter.bio">hello@encounter.bio</a></p>
+  </section>
+</div>
+{% endblock %}

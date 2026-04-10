@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Contact — Encounter{% endblock %}
+{% block description %}Get in touch with Encounter about a structural read for your trial, a retrospective re-analysis, or a custom engagement.{% endblock %}
+
+{% block content %}
+<div class="page-wide">
+
+  <section class="hero">
+    <div class="eyebrow">Contact</div>
+    <h1>Get in touch.</h1>
+    <p class="deck">Encounter is a small team. Every email is read by Raimo personally and answered within two business days.</p>
+  </section>
+
+  <div class="contact-grid">
+
+    <div class="contact-block">
+      <div class="contact-label">Email</div>
+      <div class="contact-value">
+        <a href="mailto:hello@encounter.bio">hello@encounter.bio</a>
+      </div>
+      <p class="contact-note">Best for general questions, scope discussions, and pricing conversations on prospective reports.</p>
+    </div>
+
+    <div class="contact-block">
+      <div class="contact-label">For trial designers</div>
+      <div class="contact-value">
+        <a href="{{ url_for('service') }}">Request a structural read &rarr;</a>
+      </div>
+      <p class="contact-note">If you're designing or running an immuno-oncology trial and want a structural read on your candidate population, the service page has the proposal form. Two-week turnaround, fixed-fee proposal.</p>
+    </div>
+
+    <div class="contact-block">
+      <div class="contact-label">For collaborators</div>
+      <div class="contact-value">
+        <a href="mailto:hello@encounter.bio?subject=Collaboration">Discuss a collaboration</a>
+      </div>
+      <p class="contact-note">If you're an academic group, a foundation, or another translational team interested in applying the framework to a disease family we haven't covered, we'd like to hear from you.</p>
+    </div>
+
+    <div class="contact-block">
+      <div class="contact-label">Framework reference</div>
+      <div class="contact-value">
+        <a href="https://doi.org/10.5281/zenodo.19007402">Generative Geometry on Zenodo</a>
+      </div>
+      <p class="contact-note">The structural framework underlying every Encounter report is published openly on Zenodo. The cancer immunology paper is in preparation with Bob Gatenby at Moffitt.</p>
+    </div>
+
+  </div>
+
+  <p class="contact-footnote">Encounter is based in the Netherlands. We work with sponsors, biotech, and CROs globally. There is no contact form on this page by design — every conversation is a real one.</p>
+
+</div>
+{% endblock %}

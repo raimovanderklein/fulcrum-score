@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}STAR-221 confirmed hit — Encounter{% endblock %}
+{% block description %}Encounter's structural prediction for the STAR-221 Phase 3 TIGIT trial in 1L gastric cancer was published in v1 (Apr 3, 2026). The trial had been discontinued for futility on December 12, 2025 — confirming the call as a pre-publication hit.{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <div class="report-header">
+    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Encounter" class="report-logo">
+    <div class="report-type">Confirmed hit (pre-publication)</div>
+  </div>
+
+  <h1 class="report-title">STAR-221</h1>
+  <p class="report-subtitle">Domvanalimab + zimberelimab + chemotherapy versus nivolumab + chemotherapy in first-line gastric, gastroesophageal junction, and esophageal adenocarcinoma. Discontinued for futility December 12, 2025 — the eighth Phase 3 TIGIT trial to fail.</p>
+
+  <div class="trial-fact-card">
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Trial</div><div class="fact-value">STAR-221</div></div>
+      <div class="fact"><div class="fact-label">NCT</div><div class="fact-value mono">NCT05568095</div></div>
+      <div class="fact"><div class="fact-label">Sponsor</div><div class="fact-value">Arcus / Gilead</div></div>
+      <div class="fact"><div class="fact-label">Phase</div><div class="fact-value">3</div></div>
+    </div>
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Indication</div><div class="fact-value">1L gastric / GEJ / esophageal</div></div>
+      <div class="fact"><div class="fact-label">Enrollment</div><div class="fact-value mono">~1,050 patients</div></div>
+      <div class="fact"><div class="fact-label">Discontinued</div><div class="fact-value mono">Dec 12, 2025</div></div>
+      <div class="fact"><div class="fact-label">Reason</div><div class="fact-value">Interim futility</div></div>
+    </div>
+  </div>
+
+  <div class="prediction-hero">
+    <div class="prediction-hero-label">Encounter's structural call</div>
+    <div class="prediction-hero-value fail">FAIL</div>
+    <div class="prediction-hero-sub">Filed on Zenodo April 3, 2026 · timestamp DOI <a href="https://doi.org/10.5281/zenodo.19408510">10.5281/zenodo.19408510</a> · current entry in the <a href="https://doi.org/10.5281/zenodo.19408510">Encounter Living Scorecard</a></div>
+  </div>
+
+  <div class="result-hero">
+    <div class="result-hero-label">Outcome</div>
+    <div class="result-hero-value hit">✓ HIT (pre-publication confirmation)</div>
+    <div class="result-hero-sub">STAR-221 was discontinued for futility on December 12, 2025, four months before Encounter's prediction was published in v1. This is a pre-publication confirmation analogous to KeyVibe-006 and ceralasertib: the v1 paper made the structural call from public information available at the time, but the trial had already been terminated.</div>
+  </div>
+
+  <h2>The structural argument</h2>
+  <p>Domvanalimab is an Fc-silent anti-TIGIT antibody. TIGIT and PD-1 both release brakes on T cells that have already found the tumour. They engage at the same step in the immune cycle &mdash; effector encounter, after detection and priming have already occurred. Adding a TIGIT inhibitor to a regimen that already contains PD-1 is adding a second drug at a step the regimen already covers, not adding coverage at a new step.</p>
+  <p>The control arm in STAR-221 was nivolumab + chemotherapy. The experimental arm added zimberelimab (a PD-1 inhibitor, mechanistically equivalent to nivolumab) plus domvanalimab (TIGIT). The structural change versus control was: a different brand of PD-1, plus more TIGIT. Same step coverage. The framework predicted no clinically meaningful benefit.</p>
+  <p>This was not a speculative call. STAR-221 was the eighth Phase 3 test of TIGIT + PD-1 across cancer types. Every prior Phase 3 TIGIT trial had failed: SKYSCRAPER-01 (NSCLC), SKYSCRAPER-02 (SCLC), AdvanTIG-302 (cervical), KeyVibe-003 (NSCLC), KeyVibe-007 (NSCLC), KeyVibe-008 (SCLC), and KeyVibe-010 (melanoma adjuvant). Seven Phase 3 failures across four cancer types. The mechanism class had a 0% Phase 3 success rate. The framework's structural argument placed STAR-221 in exactly the same class as the seven that had failed.</p>
+
+  <h2>What we predicted</h2>
+  <table class="prediction-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Predicted value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>PFS hazard ratio</td><td class="mono">0.95&ndash;1.05 (flat)</td></tr>
+      <tr><td>OS hazard ratio</td><td class="mono">0.95&ndash;1.05 (flat)</td></tr>
+      <tr><td>ORR &Delta; (experimental &minus; control)</td><td class="mono">0&ndash;3 percentage points</td></tr>
+      <tr><td>PD-L1 high subgroup interaction</td><td class="mono">None</td></tr>
+    </tbody>
+  </table>
+
+  <h2>What happened</h2>
+  <p>On December 12, 2025, Arcus Biosciences and Gilead Sciences announced the discontinuation of STAR-221 following an independent data monitoring committee review of a prespecified interim overall survival analysis. The committee concluded that the domvanalimab-containing combination did not improve OS compared with the nivolumab + chemotherapy control. Per Arcus chief medical officer Richard Markus: <em>&ldquo;Patients in the domvanalimab-containing arm derived the same benefit as patients treated in the control arm, and there were no new safety concerns.&rdquo;</em> The parallel Phase 2 EDGE-Gastric study evaluating the same regimen was also discontinued.</p>
+  <p>STAR-221 is now the eighth Phase 3 TIGIT + PD-1 trial to fail. The mechanism class remains 0-for-8 in Phase 3 across five cancer types. The framework's structural argument &mdash; that TIGIT and PD-1 occupy the same step and adding TIGIT therefore cannot improve outcomes &mdash; has now been confirmed by every Phase 3 trial of the combination that has reported.</p>
+
+  <h2>What this means for trial design</h2>
+  <p>The pattern is now sufficiently established that any new Phase 3 trial proposing to add a TIGIT inhibitor to a checkpoint-containing regimen should be expected to fail unless it can articulate why this combination is structurally different from the eight that have failed before it. The framework's structural read service can identify combinations that share this property before the trial is enrolled, saving the development cost.</p>
+
+  <div class="purchase-block">
+    <h3>Test your trial against the framework</h3>
+    <p class="purchase-intro">If you are designing or evaluating a clinical trial in immuno-oncology, request a structural read on your candidate population and drug combination. We tell you which step of the immune cycle your population is held at, and whether your regimen covers that step.</p>
+    <p style="text-align: center; margin-top: 24px;"><a href="{{ url_for('service') }}" class="btn">Request a proposal &rarr;</a></p>
+    <div class="form-meta" style="text-align: center;">2-week turnaround &middot; fixed-fee proposal</div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% block title %}Service — Encounter{% endblock %}
+{% block description %}Encounter offers two ways to engage on immunotherapy trial design: a directional structural call on whether your trial is positioned to read out, and a full structural read with per-patient stratification, arm-sizing, and source code.{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page-wide">
+
+  <section class="hero">
+    <div class="eyebrow">The service</div>
+    <h1>Apply the framework to your trial.</h1>
+    <p class="deck">Encounter offers two ways to engage. A short directional call on whether your trial design is structurally positioned to read out, and a full structural read with per-patient stratification, arm-sizing, and the source code that runs the calculation against your own data.</p>
+  </section>
+
+  <!-- Two tiers -->
+  <div class="service-section">
+    <div class="section-label">Two ways to engage</div>
+    <div class="tier-grid">
+
+      <div class="tier">
+        <div class="tier-label">Tier 1</div>
+        <div class="tier-name">Structural call</div>
+        <div class="tier-deck">A directional call on whether your trial design is structurally positioned to read out. Suitable for go/no-go decisions, competitive intelligence, and early-stage design review.</div>
+        <ul class="tier-list">
+          <li>Directional call: <span class="mono">WIN</span>, <span class="mono">FAIL</span>, <span class="mono">EQUIVALENT</span>, or <span class="mono">SIGNAL</span></li>
+          <li>The named structural reason in two or three sentences</li>
+          <li>The closest analog trials with citations</li>
+          <li>One critical test to look for in the readout data</li>
+          <li>One-page memo, delivered as a PDF</li>
+        </ul>
+        <div class="tier-meta">5 business days · single trial · one page</div>
+        <div class="tier-not"><strong>Not included:</strong> per-patient stratification, predicted response rates, arm-sizing analysis, enrolment criteria, source code. For those, see the structural read.</div>
+      </div>
+
+      <div class="tier tier-primary">
+        <div class="tier-label">Tier 2</div>
+        <div class="tier-name">Structural read</div>
+        <div class="tier-deck">The full deliverable. A structural classification of your candidate population, predicted response rates per class, arm-sizing implications, and the source code that runs the calculation against your own pre-treatment bulk RNA-seq.</div>
+        <ul class="tier-list">
+          <li>Per-patient structural classification</li>
+          <li>Predicted response rates per class, with confidence intervals</li>
+          <li>Arm-sizing analysis under stratified enrolment</li>
+          <li>Defensible enrolment criteria with the gene panel and cutoff</li>
+          <li>Source code that runs against your own bulk RNA-seq</li>
+          <li>90-minute readout call with the full report</li>
+        </ul>
+        <div class="tier-meta">2 weeks · full report · readout call included</div>
+        <div class="tier-not"><strong>Best for:</strong> trials already in design where the question is how to structure them to win, not whether to pursue them at all.</div>
+      </div>
+
+    </div>
+    <p class="tier-footnote">Both tiers begin with the same proposal form below. Tell us which tier you're interested in and we will reply within two business days with scope and a fixed-fee proposal. If your question requires the structural read but the form suggests the call, we will tell you in the scoping reply.</p>
+  </div>
+
+  <!-- What you get (Tier 2 detail) -->
+  <div class="service-section">
+    <div class="section-label">Tier 2 in detail — what the structural read delivers</div>
+    <div class="benefit-grid">
+      <div class="benefit">
+        <div class="benefit-num">01</div>
+        <div class="benefit-title">A structural classification of your population</div>
+        <div class="benefit-text">Each patient placed in one of the framework's classes — held upstream, past the point of action, or in the addressable window. With confidence intervals.</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">02</div>
+        <div class="benefit-title">Predicted response rates per class</div>
+        <div class="benefit-text">For your specific drug mechanism. Calibrated against the closest published cohorts. Honest error bars where the data is thin.</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">03</div>
+        <div class="benefit-title">Arm-sizing implications</div>
+        <div class="benefit-text">If you stratify on the structural call, what sample size do you need to detect a +15pp effect? +20pp? With and without screening cost.</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">04</div>
+        <div class="benefit-title">A defensible enrolment criterion</div>
+        <div class="benefit-text">If your drug only works on patients in a specific class, the report tells you which gene panel separates them and where to set the cutoff.</div>
+      </div>
+      <div class="benefit highlight-benefit">
+        <div class="benefit-num">05</div>
+        <div class="benefit-title">The method, end to end</div>
+        <div class="benefit-text">The exact panel composition, the threshold logic, the per-marker rationale, and the source code that runs the structural calculation against your own pre-treatment bulk RNA-seq. Public Encounter reports show what the framework concluded; the service delivers the calculation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div class="service-section">
+    <div class="section-label">Tier 2 process — from brief to delivered report</div>
+    <div class="process-flow">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div class="step-title">Submit a brief</div>
+        <div class="step-time">5 minutes</div>
+        <div class="step-text">Fill the form below with the trial details: indication, drug class, phase, the specific question you want answered. No NDA needed — the form covers what we need to scope.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div class="step-title">Scoping call</div>
+        <div class="step-time">Within 2 business days</div>
+        <div class="step-text">A 30-minute call to confirm the trial details, share any pre-existing data we should look at, and align on what the deliverable should answer. After the call you receive a fixed-fee proposal.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div class="step-title">Structural read</div>
+        <div class="step-time">2 weeks</div>
+        <div class="step-text">We pull the relevant published cohorts, run the framework against your trial's design, and produce the report. You get a draft after 10 business days for review.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div class="step-title">Final report + briefing</div>
+        <div class="step-time">After review</div>
+        <div class="step-text">Final PDF delivered, plus a 60-minute briefing call where we walk your team through the call, the reasoning, and the trial-design implications. You can use the report internally however you want.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The proposal form -->
+  <div id="proposal-form" class="service-section">
+    <div class="section-label">Request a proposal</div>
+    <p class="section-intro">Fill in the brief. We reply within two business days with a scoping call invitation and a fixed-fee proposal.</p>
+
+    <form method="POST" action="{{ url_for('request_structural_read') }}" class="proposal-form">
+
+      <div class="form-section">
+        <div class="form-section-label">About you</div>
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="name">Name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-field">
+            <label for="email">Work email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="you@yourcompany.com">
+          </div>
+        </div>
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="organization">Organization <span class="req">*</span></label>
+            <input type="text" id="organization" name="organization" required placeholder="Pharma, biotech, CRO">
+          </div>
+          <div class="form-field">
+            <label for="role">Role <span class="req">*</span></label>
+            <input type="text" id="role" name="role" required placeholder="Clinical Development Lead">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-label">The trial</div>
+
+        <div class="form-field">
+          <label for="tier">Which tier are you interested in? <span class="req">*</span></label>
+          <select id="tier" name="tier" required>
+            <option value="">Select tier…</option>
+            <option value="Tier 1 — Structural call">Tier 1 — Structural call (5 business days, directional one-pager)</option>
+            <option value="Tier 2 — Structural read">Tier 2 — Structural read (2 weeks, full report with stratification and arm-sizing)</option>
+            <option value="Not sure — please advise">Not sure — please advise</option>
+          </select>
+          <div class="helper">If your question requires the structural read but you select the call, we will tell you in the scoping reply.</div>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="indication">Indication <span class="req">*</span></label>
+            <select id="indication" name="indication" required>
+              <option value="">Select indication…</option>
+              <option>Melanoma</option>
+              <option>Non-small cell lung cancer (NSCLC)</option>
+              <option>Small cell lung cancer (SCLC)</option>
+              <option>Bladder / urothelial</option>
+              <option>Renal cell carcinoma</option>
+              <option>Hepatocellular carcinoma</option>
+              <option>Gastric / esophageal</option>
+              <option>Colorectal</option>
+              <option>Breast (TNBC)</option>
+              <option>Breast (HR+/HER2-)</option>
+              <option>Breast (HER2+)</option>
+              <option>Pancreatic</option>
+              <option>Head and neck</option>
+              <option>Ovarian</option>
+              <option>Endometrial</option>
+              <option>Glioblastoma</option>
+              <option>Hematologic malignancy</option>
+              <option>Other solid tumor</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="drug_class">Drug class / mechanism <span class="req">*</span></label>
+            <select id="drug_class" name="drug_class" required>
+              <option value="">Select drug class…</option>
+              <option>Anti-PD-1 / anti-PD-L1</option>
+              <option>Anti-CTLA-4</option>
+              <option>Anti-LAG-3</option>
+              <option>Anti-TIGIT</option>
+              <option>Anti-TIM-3</option>
+              <option>Anti-CCR8 (Treg depletion)</option>
+              <option>Bispecific T-cell engager</option>
+              <option>Antibody-drug conjugate (ADC)</option>
+              <option>CAR-T / cell therapy</option>
+              <option>Cancer vaccine</option>
+              <option>Cytokine (IL-2, IL-15, etc.)</option>
+              <option>Oncolytic virus</option>
+              <option>Targeted small molecule</option>
+              <option>Combination of above</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="trial_phase">Trial phase <span class="req">*</span></label>
+            <select id="trial_phase" name="trial_phase" required>
+              <option value="">Select phase…</option>
+              <option>Preclinical / IND-enabling</option>
+              <option>Phase 1</option>
+              <option>Phase 1b / dose expansion</option>
+              <option>Phase 2</option>
+              <option>Phase 2/3</option>
+              <option>Phase 3</option>
+              <option>Phase 4 / post-marketing</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="design_stage">Stage of design <span class="req">*</span></label>
+            <select id="design_stage" name="design_stage" required>
+              <option value="">Select stage…</option>
+              <option>Concept / target selection</option>
+              <option>Protocol drafting</option>
+              <option>Pre-IRB submission</option>
+              <option>IRB / regulatory review</option>
+              <option>Site selection / enrolment ramp</option>
+              <option>Enrolling</option>
+              <option>Mid-trial / interim analysis</option>
+              <option>Pre-readout</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="nct">ClinicalTrials.gov NCT (optional)</label>
+          <input type="text" id="nct" name="nct" placeholder="NCT05XXXXXXX — if your trial is registered">
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-label">The question</div>
+
+        <div class="form-field">
+          <label for="question">What do you want answered? <span class="req">*</span></label>
+          <textarea id="question" name="question" rows="4" required placeholder="e.g. What fraction of our population is structurally addressable by this combination? Should we add a stratification arm? Is this combination structurally distinct from PD-1 monotherapy?"></textarea>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="timeline">Timeline <span class="req">*</span></label>
+            <select id="timeline" name="timeline" required>
+              <option value="">Select timeline…</option>
+              <option>Within 1 week (rush)</option>
+              <option>2 weeks (standard)</option>
+              <option>1 month</option>
+              <option>2–3 months</option>
+              <option>Flexible / no fixed deadline</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="referral">How did you hear about Encounter?</label>
+            <select id="referral" name="referral">
+              <option value="">Select…</option>
+              <option>Zenodo (published predictions paper)</option>
+              <option>Colleague referral</option>
+              <option>Conference / talk</option>
+              <option>LinkedIn / Twitter</option>
+              <option>Web search</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary">Request proposal</button>
+      <div class="form-meta">No payment is collected on this page. We reply within 2 business days with a scoping call invitation and a fixed-fee proposal.</div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

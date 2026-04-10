@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}KEYLYNK-012 structural prediction — Encounter{% endblock %}
+{% block description %}Encounter's published structural prediction for the Phase 3 KEYLYNK-012 trial of pembro + CRT &plusmn; olaparib in Stage III NSCLC. Filed before readout.{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <div class="report-header">
+    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Encounter" class="report-logo">
+    <div class="report-type">Prospective prediction</div>
+  </div>
+
+  <h1 class="report-title">KEYLYNK-012</h1>
+  <p class="report-subtitle">Pembrolizumab plus concurrent chemoradiation followed by pembrolizumab with or without olaparib, versus chemoradiation followed by durvalumab consolidation, in unresectable Stage III non-small cell lung cancer. A test of whether a PARP inhibitor added to an unselected population produces a different result than KEYLYNK-008 and KEYLYNK-010 already did.</p>
+
+  <div class="trial-fact-card">
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Trial</div><div class="fact-value">KEYLYNK-012</div></div>
+      <div class="fact"><div class="fact-label">NCT</div><div class="fact-value mono">NCT04380636</div></div>
+      <div class="fact"><div class="fact-label">Sponsor</div><div class="fact-value">Merck</div></div>
+      <div class="fact"><div class="fact-label">Phase</div><div class="fact-value">3</div></div>
+    </div>
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Indication</div><div class="fact-value">Stage III NSCLC, unresectable</div></div>
+      <div class="fact"><div class="fact-label">Enrollment</div><div class="fact-value mono">870 patients</div></div>
+      <div class="fact"><div class="fact-label">Est. trial cost</div><div class="fact-value mono">~$35M<sup>*</sup></div></div>
+      <div class="fact"><div class="fact-label">Readout</div><div class="fact-value">July 2026 (target)</div></div>
+    </div>
+  </div>
+
+  <div class="prediction-hero">
+    <div class="prediction-hero-label">Encounter's structural call</div>
+    <div class="prediction-hero-value fail">FAIL (olaparib arm)</div>
+    <div class="prediction-hero-sub">Filed on Zenodo before readout · timestamp DOI <a href="https://doi.org/10.5281/zenodo.19408510">10.5281/zenodo.19408510</a> · current entry in the <a href="https://doi.org/10.5281/zenodo.19408510">Encounter Living Scorecard</a></div>
+  </div>
+
+  <h2>The structural argument</h2>
+  <p>KEYLYNK-012 has three arms. The control arm is concurrent chemoradiation followed by durvalumab consolidation &mdash; the current standard of care for unresectable Stage III NSCLC, established by PACIFIC. The two experimental arms are pembrolizumab given concurrently with chemoradiation followed by pembrolizumab consolidation either with placebo or with olaparib. The trial is testing two questions at once: whether concurrent pembro beats sequential durva, and whether olaparib adds anything to the pembro consolidation.</p>
+  <p>The framework's prediction concerns the second question. Olaparib inhibits DNA repair via PARP. The mechanism creates double-strand breaks in cells that depend on PARP for repair, which is most relevant in tumours with pre-existing homologous repair deficiencies (HRD-positive). HRD-positive tumours are roughly 15% of NSCLC. The remaining 85% are HRD-proficient and derive minimal benefit from PARP inhibition.</p>
+  <p>KEYLYNK-012 enrols an unselected NSCLC population. The trial does not stratify enrolment by HRD status. The structural argument is that any signal from the responsive 15% subgroup will be diluted by the non-responsive 85% to a magnitude below the detection threshold for a primary endpoint analysis powered on the full population. KEYLYNK-008 (pembro + olaparib in metastatic squamous NSCLC) was already discontinued for futility in April 2024. KEYLYNK-010 (pembro + olaparib in 2L NSCLC, also unselected) was negative for the same reason. The framework's prediction is that adding olaparib to pembrolizumab consolidation in an unselected Stage III NSCLC population will produce the same result.</p>
+
+  <h2>What we predict, specifically</h2>
+  <p>Each row below is a falsifiable claim with a value range. If the trial reports out within these ranges, the prediction is a hit. If it reports outside them in the named direction, the prediction is a miss.</p>
+
+  <table class="prediction-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Predicted value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PFS HR (pembro + olaparib vs pembro + placebo)</td>
+        <td class="mono">0.90&ndash;1.05 (not significant)</td>
+      </tr>
+      <tr>
+        <td>OS HR (pembro + olaparib vs pembro + placebo)</td>
+        <td class="mono">0.90&ndash;1.10 (not significant)</td>
+      </tr>
+      <tr>
+        <td>HRD-positive subgroup, if reported</td>
+        <td class="mono">Possible signal (HR ~0.70&ndash;0.85)</td>
+      </tr>
+      <tr>
+        <td>Toxicity, olaparib arm</td>
+        <td class="mono">Higher than placebo arm</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="critical-test"><strong>The critical test:</strong> if the trial reports PFS hazard ratio below 0.80 with statistical significance for the olaparib-containing arm versus the placebo arm in the full unselected population, the framework's claim that population dilution makes this trial unwinnable is wrong. The claim could still be partially right at the subgroup level if an HRD-positive subgroup analysis shows a strong effect; in that case the prediction is a directional hit on the broader claim but a miss on the primary endpoint call. Note: the framework does not predict the outcome of the parallel question (pembro + CRT vs CRT + durvalumab), which is a different structural comparison.</p>
+
+  <h2>The full report</h2>
+  <p>The structural reasoning behind the call &mdash; which steps in the immune cycle each drug covers, where the prediction would break, what it means for the design of follow-on trials in adjacent indications &mdash; is in the full report. The full report also includes the framework's per-metric reasoning for each row in the table above and the structural mapping for the trial's arms.</p>
+
+  <div class="purchase-block">
+    <h3>Purchase this report</h3>
+    <p class="purchase-intro">Fill the form to start the purchase. We reply within two business days with the price, scope, and a Stripe invoice. The full report is delivered as a PDF on payment.</p>
+
+    <form method="POST" action="{{ url_for('lead_prospective') }}">
+      <input type="hidden" name="slug" value="{{ report.slug }}">
+      <input type="hidden" name="report_title" value="KEYLYNK-012 — pembro + CRT ± olaparib vs CRT + durvalumab">
+
+      <div class="form-field">
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" required placeholder="you@yourcompany.com">
+        <div class="helper">Free email providers are blocked. If you don't have a work address, email us directly at hello@encounter.bio.</div>
+      </div>
+
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-field">
+        <label for="organization">Organization</label>
+        <input type="text" id="organization" name="organization" required placeholder="Pharma, biotech, CRO, academic center">
+      </div>
+
+      <div class="form-field">
+        <label for="role">Your role</label>
+        <input type="text" id="role" name="role" required placeholder="e.g. Clinical Development Lead, Translational Director">
+      </div>
+
+      <div class="form-field optional">
+        <label for="purpose">What are you working on? (optional)</label>
+        <input type="text" id="purpose" name="purpose" placeholder="e.g. Designing a Stage III NSCLC trial in 2026">
+      </div>
+
+      <button type="submit" class="btn">Purchase this report</button>
+      <div class="form-meta">No payment is collected on this page. We reply within two business days with scope and price.</div>
+    </form>
+  </div>
+
+  <p class="footnote-asterisk"><sup>*</sup> Trial cost estimate: 870 patients &times; $40K median per patient (oncology Phase 3, US sites, Moore et al. 2018 cross-sectional analysis of 2015&ndash;2017 trials). Order-of-magnitude only &mdash; actual trial cost is not publicly disclosed.</p>
+
+</div>
+{% endblock %}

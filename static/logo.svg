@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 36" width="175" height="36" role="img" aria-label="Encounter">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 24 -11"/>
+    </filter>
+  </defs>
+  <text x="0" y="27"
+        font-family="Charter, 'Iowan Old Style', 'Sitka Text', Georgia, serif"
+        font-size="28"
+        font-weight="700"
+        letter-spacing="-0.01em"
+        fill="#1a1a1a">Encounter</text>
+  <!-- R=8, r=8/φ≈4.94 -->
+  <g filter="url(#goo)" transform="translate(140, 0)">
+    <circle cx="6" cy="22" r="4.94" fill="#c84a2e"/>
+    <circle cx="15" cy="13" r="8" fill="#c84a2e"/>
+  </g>
+</svg>

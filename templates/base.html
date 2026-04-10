@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Encounter — Structural reads for trial design{% endblock %}</title>
+  <meta name="description" content="{% block description %}Encounter produces structural reads on immunotherapy trial populations. Retrospective re-analyses and prospective stratification reports for clinical development teams.{% endblock %}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='mark.svg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='brand.css') }}">
+  {% if ga_measurement_id %}
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ ga_measurement_id }}');
+  </script>
+  {% endif %}
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="{{ url_for('home') }}" class="brand">
+      <img src="{{ url_for('static', filename='logo.svg') }}" alt="Encounter" class="brand-logo">
+      <span class="brand-tag">Structural reads · trial design</span>
+    </a>
+    <nav>
+      <a href="{{ url_for('service') }}">Service</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+    </nav>
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="links">
+      <a href="{{ url_for('service') }}">Service</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+    </div>
+    <div class="meta">
+      Built on Generative Geometry (van der Klein, 2026) ·
+      <a href="https://doi.org/10.5281/zenodo.19007402">DOI</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

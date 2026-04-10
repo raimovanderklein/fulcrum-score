@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}ENERGIZE structural prediction — Encounter{% endblock %}
+{% block description %}Encounter's published structural prediction for the Phase 3 ENERGIZE trial of nivolumab + chemo &plusmn; linrodostat in cisplatin-eligible perioperative MIBC. Filed before readout.{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <div class="report-header">
+    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Encounter" class="report-logo">
+    <div class="report-type">Prospective prediction</div>
+  </div>
+
+  <h1 class="report-title">ENERGIZE</h1>
+  <p class="report-subtitle">Neoadjuvant gemcitabine/cisplatin alone, with nivolumab, or with nivolumab plus linrodostat in cisplatin-eligible muscle-invasive bladder cancer. A three-arm Phase 3 test of whether IDO1 inhibition adds anything to PD-1 + chemo &mdash; the cleanest possible test of the coverage principle in any trial currently on the scorecard.</p>
+
+  <div class="trial-fact-card">
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Trial</div><div class="fact-value">ENERGIZE</div></div>
+      <div class="fact"><div class="fact-label">NCT</div><div class="fact-value mono">NCT03661320</div></div>
+      <div class="fact"><div class="fact-label">Sponsor</div><div class="fact-value">Bristol Myers Squibb</div></div>
+      <div class="fact"><div class="fact-label">Phase</div><div class="fact-value">3</div></div>
+    </div>
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Indication</div><div class="fact-value">Cisplatin-eligible MIBC, perioperative</div></div>
+      <div class="fact"><div class="fact-label">Enrollment</div><div class="fact-value mono">~1,200 patients</div></div>
+      <div class="fact"><div class="fact-label">Est. trial cost</div><div class="fact-value mono">~$48M<sup>*</sup></div></div>
+      <div class="fact"><div class="fact-label">Readout</div><div class="fact-value">ASCO 2026 (target)</div></div>
+    </div>
+  </div>
+
+  <div class="prediction-hero">
+    <div class="prediction-hero-label">Encounter's structural call</div>
+    <div class="prediction-hero-value fail">FAIL (IDO1 arm)</div>
+    <div class="prediction-hero-sub">Filed on Zenodo before readout · timestamp DOI <a href="https://doi.org/10.5281/zenodo.19408510">10.5281/zenodo.19408510</a> · current entry in the <a href="https://doi.org/10.5281/zenodo.19408510">Encounter Living Scorecard</a></div>
+  </div>
+
+  <h2>The structural argument</h2>
+  <p>Linrodostat (BMS-986205) is an oral IDO1 inhibitor. IDO1 modulates the same immune-suppression pathway that PD-1 already addresses &mdash; both work to release T cells from suppression at the effector encounter step. ECHO-301 (pembrolizumab &plusmn; epacadostat in melanoma, n=706) tested an analogous combination in a different cancer type and found that IDO1 inhibition adds nothing to PD-1 blockade. There is no structural reason to expect a different outcome in bladder cancer.</p>
+  <p>What makes ENERGIZE unusually clean is the three-arm design. Arm A is gemcitabine/cisplatin alone. Arm B is gemcitabine/cisplatin + nivolumab. Arm C is gemcitabine/cisplatin + nivolumab + linrodostat. The framework's prediction is that Arm B will significantly outperform Arm A &mdash; PD-1 adds a genuinely new step (encounter) to chemotherapy alone, which is what the existing immuno-oncology literature shows. But Arm C will be statistically indistinguishable from Arm B, because IDO1 is redundant with the PD-1 step already present in Arm B. The IDO1 arm adds drug burden without adding coverage.</p>
+  <p>This is the only trial currently on the Encounter scorecard where the coverage principle can be tested in a single data table by comparing three arms ordered by step coverage: zero added steps (chemo alone), one added step (chemo + PD-1), one added step plus a duplicate (chemo + PD-1 + IDO1). If the framework is right, the differences look like (B &gt; A, large) and (C &asymp; B, small).</p>
+
+  <h2>What we predict, specifically</h2>
+  <p>Each row below is a falsifiable claim with a value range. If the trial reports out within these ranges, the prediction is a hit. If it reports outside them in the named direction, the prediction is a miss.</p>
+
+  <table class="prediction-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Predicted value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Arm A pCR (gemcitabine/cisplatin alone)</td>
+        <td class="mono">Baseline</td>
+      </tr>
+      <tr>
+        <td>Arm B pCR (gem/cis + nivo)</td>
+        <td class="mono">Significantly above Arm A</td>
+      </tr>
+      <tr>
+        <td>Arm C pCR (gem/cis + nivo + linrodostat)</td>
+        <td class="mono">Statistically indistinguishable from Arm B</td>
+      </tr>
+      <tr>
+        <td>&Delta;(C &minus; B)</td>
+        <td class="mono">0&ndash;5 percentage points (ns)</td>
+      </tr>
+      <tr>
+        <td>&Delta;(B &minus; A)</td>
+        <td class="mono">Meaningfully positive, statistically significant</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="critical-test"><strong>The critical test:</strong> the prediction holds if and only if (B &gt; A) AND (C &asymp; B). If Arm C is significantly better than Arm B by more than 5pp, the framework's claim that IDO1 is redundant with PD-1 is wrong. If Arm B is not significantly better than Arm A, the framework's broader claim about checkpoint blockade adding a step to chemotherapy is wrong (and most of immuno-oncology is wrong with it). The latter would be a much larger anomaly than the former.</p>
+
+  <h2>The full report</h2>
+  <p>The structural reasoning behind the call &mdash; which steps in the immune cycle each drug covers, where the prediction would break, what it means for the design of follow-on trials in adjacent indications &mdash; is in the full report. The full report also includes the framework's per-metric reasoning for each row in the table above and the structural mapping for the trial's arms.</p>
+
+  <div class="purchase-block">
+    <h3>Purchase this report</h3>
+    <p class="purchase-intro">Fill the form to start the purchase. We reply within two business days with the price, scope, and a Stripe invoice. The full report is delivered as a PDF on payment.</p>
+
+    <form method="POST" action="{{ url_for('lead_prospective') }}">
+      <input type="hidden" name="slug" value="{{ report.slug }}">
+      <input type="hidden" name="report_title" value="ENERGIZE — nivolumab + chemo ± linrodostat">
+
+      <div class="form-field">
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" required placeholder="you@yourcompany.com">
+        <div class="helper">Free email providers are blocked. If you don't have a work address, email us directly at hello@encounter.bio.</div>
+      </div>
+
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-field">
+        <label for="organization">Organization</label>
+        <input type="text" id="organization" name="organization" required placeholder="Pharma, biotech, CRO, academic center">
+      </div>
+
+      <div class="form-field">
+        <label for="role">Your role</label>
+        <input type="text" id="role" name="role" required placeholder="e.g. Clinical Development Lead, Translational Director">
+      </div>
+
+      <div class="form-field optional">
+        <label for="purpose">What are you working on? (optional)</label>
+        <input type="text" id="purpose" name="purpose" placeholder="e.g. Designing a periop bladder trial in 2026">
+      </div>
+
+      <button type="submit" class="btn">Purchase this report</button>
+      <div class="form-meta">No payment is collected on this page. We reply within two business days with scope and price.</div>
+    </form>
+  </div>
+
+  <p class="footnote-asterisk"><sup>*</sup> Trial cost estimate: ~1,200 patients &times; $40K median per patient (oncology Phase 3, US sites, Moore et al. 2018 cross-sectional analysis of 2015&ndash;2017 trials). Order-of-magnitude only &mdash; actual trial cost is not publicly disclosed.</p>
+
+</div>
+{% endblock %}

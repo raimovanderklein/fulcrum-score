@@ -1,0 +1,57 @@
+<a href="{{ url_for('report', slug=r.slug) }}" class="report-card unified-card {{ r.type }}-card">
+
+  <div class="card-top">
+    {% if r.type == 'prospective' %}
+      <span class="badge prospective-badge">Published prediction</span>
+      {% if r.readout %}<span class="card-readout">Reads {{ r.readout }}</span>{% endif %}
+    {% else %}
+      {% if r.result_score == 'HIT' %}
+        <span class="badge hit-badge">✓ Confirmed hit</span>
+      {% elif r.result_score == 'NEAR MISS' %}
+        <span class="badge near-badge">~ Near miss</span>
+      {% elif r.result_score == 'MISS' %}
+        <span class="badge miss-badge">✗ Miss</span>
+      {% else %}
+        <span class="badge retro-badge">Retrospective</span>
+      {% endif %}
+      {% if r.readout %}<span class="card-readout">{{ r.readout }}</span>{% endif %}
+    {% endif %}
+  </div>
+
+  <div class="card-trial-name">{{ r.trial_name }}{% if r.nct %} <span class="card-nct">· {{ r.nct }}</span>{% endif %}</div>
+  <div class="card-trial-line">{{ r.drug }} — {{ r.indication }}</div>
+
+  <div class="card-prediction">
+    <div class="card-prediction-row">
+      <span class="card-prediction-label">Encounter call</span>
+      <span class="card-prediction-value {% if 'WIN' in r.prediction_call %}call-win{% elif 'FAIL' in r.prediction_call %}call-fail{% endif %}">{{ r.prediction_call }}</span>
+    </div>
+    {% if r.prediction_headline %}
+    <div class="card-prediction-headline">{{ r.prediction_headline }}</div>
+    {% endif %}
+  </div>
+
+  {% if r.result_observed %}
+  <div class="card-result">
+    <div class="card-result-row">
+      <span class="card-result-label">Observed</span>
+      <span class="card-result-value">{{ r.result_observed }}</span>
+    </div>
+    {% if r.result_delta %}
+    <div class="card-result-delta">{{ r.result_delta }}</div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="card-meta">
+    <div class="card-meta-left">
+      {% if r.phase %}<span>{{ r.phase }}</span>{% endif %}
+      {% if r.n %}<span>n={{ r.n }}</span>{% endif %}
+      {% if r.trial_cost_estimate_usd_m %}<span class="card-trial-cost">~${{ r.trial_cost_estimate_usd_m }}M est.<sup>*</sup></span>{% endif %}
+    </div>
+    <div class="card-cta">
+      {% if r.type == 'prospective' %}Purchase →{% else %}Read →{% endif %}
+    </div>
+  </div>
+
+</a>

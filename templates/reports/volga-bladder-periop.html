@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}VOLGA structural prediction — Encounter{% endblock %}
+{% block description %}Encounter's published structural prediction for the VOLGA Phase 3 trial of durvalumab + tremelimumab + enfortumab vedotin in cisplatin-ineligible muscle-invasive bladder cancer. Filed before readout.{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <div class="report-header">
+    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Encounter" class="report-logo">
+    <div class="report-type">Prospective prediction</div>
+  </div>
+
+  <h1 class="report-title">VOLGA</h1>
+  <p class="report-subtitle">Durvalumab + tremelimumab + enfortumab vedotin vs standard of care, perioperative cisplatin-ineligible muscle-invasive bladder cancer.</p>
+
+  <div class="trial-fact-card">
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Trial</div><div class="fact-value">VOLGA</div></div>
+      <div class="fact"><div class="fact-label">NCT</div><div class="fact-value mono">NCT04960709</div></div>
+      <div class="fact"><div class="fact-label">Sponsor</div><div class="fact-value">AstraZeneca</div></div>
+      <div class="fact"><div class="fact-label">Phase</div><div class="fact-value">3</div></div>
+    </div>
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Indication</div><div class="fact-value">MIBC, cisplatin-ineligible</div></div>
+      <div class="fact"><div class="fact-label">Enrollment</div><div class="fact-value mono">830 patients</div></div>
+      <div class="fact"><div class="fact-label">Est. trial cost</div><div class="fact-value mono">~$33M<sup>*</sup></div></div>
+      <div class="fact"><div class="fact-label">Readout</div><div class="fact-value">April 2026</div></div>
+    </div>
+  </div>
+
+  <div class="prediction-hero">
+    <div class="prediction-hero-label">Encounter's structural call</div>
+    <div class="prediction-hero-value win">WIN ≥20pp</div>
+    <div class="prediction-hero-sub">Filed on Zenodo before readout · timestamp DOI <a href="https://doi.org/10.5281/zenodo.19408510">10.5281/zenodo.19408510</a> · current entry in the <a href="https://doi.org/10.5281/zenodo.19408510">Encounter Living Scorecard</a></div>
+  </div>
+
+  <h2>What we predict, specifically</h2>
+  <p>The VOLGA trial reports out this month. Below are the headline numbers Encounter predicted before any results were public. Each row is a falsifiable claim with a value range.</p>
+
+  <table class="prediction-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Predicted value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>pCR triplet arm (durva + treme + EV)</td>
+        <td class="mono">≥50%, likely 55–65%</td>
+      </tr>
+      <tr>
+        <td>pCR duplet arm (durva + EV)</td>
+        <td class="mono">Lower than triplet</td>
+      </tr>
+      <tr>
+        <td>pCR control (chemo / SOC)</td>
+        <td class="mono">~25–30%</td>
+      </tr>
+      <tr>
+        <td>Δ triplet vs control</td>
+        <td class="mono">≥20 percentage points</td>
+      </tr>
+      <tr>
+        <td>ctDNA clearance, triplet arm</td>
+        <td class="mono">≥70%</td>
+      </tr>
+      <tr>
+        <td>PD-L1 negative subgroup</td>
+        <td class="mono">Still responds well</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="critical-test"><strong>The critical test:</strong> if Arm A &gt; Arm B &gt; Control, the benefit scales with the number of independent steps the regimen covers. That pattern in one data table is the structural prediction in its falsifiable form.</p>
+
+  <h2>The full report</h2>
+  <p>The structural reasoning behind the call — which steps in the immune cycle each drug covers, why three steps differ from two, where the prediction would break, what it means for the design of follow-on trials in adjacent indications — is in the full report. The full report also includes the framework's per-metric reasoning for each row in the table above, the structural mapping for the trial's three arms, and the implications for a sponsor running a similar combination in a different indication.</p>
+
+  <div class="purchase-block">
+    <h3>Purchase this report</h3>
+    <p class="purchase-intro">Fill the form to start the purchase. We reply within two business days with the price, scope, and a Stripe invoice. The full report is delivered as a PDF on payment.</p>
+
+    <form method="POST" action="{{ url_for('lead_prospective') }}">
+      <input type="hidden" name="slug" value="{{ report.slug }}">
+      <input type="hidden" name="report_title" value="VOLGA — durvalumab + tremelimumab + enfortumab vedotin">
+
+      <div class="form-field">
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" required placeholder="you@yourcompany.com">
+        <div class="helper">Free email providers are blocked. If you don't have a work address, email us directly at hello@encounter.bio.</div>
+      </div>
+
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-field">
+        <label for="organization">Organization</label>
+        <input type="text" id="organization" name="organization" required placeholder="Pharma, biotech, CRO, academic center">
+      </div>
+
+      <div class="form-field">
+        <label for="role">Your role</label>
+        <input type="text" id="role" name="role" required placeholder="e.g. Clinical Development Lead, Translational Director">
+      </div>
+
+      <div class="form-field optional">
+        <label for="purpose">What are you working on? (optional)</label>
+        <input type="text" id="purpose" name="purpose" placeholder="e.g. Designing a periop bladder trial in 2026">
+      </div>
+
+      <button type="submit" class="btn">Purchase this report</button>
+      <div class="form-meta">No payment is collected on this page. We reply within two business days with scope and price.</div>
+    </form>
+  </div>
+
+  <p class="footnote-asterisk"><sup>*</sup> Trial cost estimate: 830 patients × $40K median per patient (oncology Phase 3, US sites, Moore et al. 2018 cross-sectional analysis of 2015–2017 trials). Order-of-magnitude only — actual VOLGA cost is not publicly disclosed.</p>
+
+</div>
+{% endblock %}

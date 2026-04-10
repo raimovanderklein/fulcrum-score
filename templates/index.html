@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Encounter — Structural reads for immuno-oncology trial design{% endblock %}
+
+{% block content %}
+<div class="page-wide">
+
+  <section class="hero">
+    <div class="eyebrow">For clinical development leads designing immuno-oncology trials</div>
+    <h1>A stratification service for immuno-oncology trial design.</h1>
+    <p class="deck">Encounter produces structural reads on candidate trial populations — telling you which patients sit upstream of where your drug acts, and which sit past it. Use it to size arms, set enrolment criteria, and pick the trials that have a chance of reading out.</p>
+  </section>
+
+  <!-- Primary CTA — service request -->
+  <section class="service-cta">
+    <div class="service-cta-inner">
+      <div class="service-cta-text">
+        <div class="service-cta-eyebrow">The service</div>
+        <h2>Prospective structural reads on immunotherapy trials, before they read out.</h2>
+      </div>
+      <div class="service-cta-action">
+        <a href="{{ url_for('service') }}" class="btn-primary">Request a proposal →</a>
+        <div class="service-cta-meta">2-week turnaround · fixed-fee proposal</div>
+      </div>
+    </div>
+  </section>
+
+  {% set retrospectives = reports | selectattr('type', 'equalto', 'retrospective') | list %}
+  {% set prospectives  = reports | selectattr('type', 'equalto', 'prospective')  | list %}
+
+  {% if retrospectives %}
+  <div class="section-label">Retrospective reports — confirmed predictions</div>
+  <p class="section-intro">Re-analyses of published immunotherapy trials. The framework's structural call versus what the trial measured. Methodology demonstrations, fully open after one form.</p>
+
+  <div class="report-grid">
+    {% for r in retrospectives %}
+    {% include 'partials/report_card.html' %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if prospectives %}
+  <div class="section-label">Prospective predictions — published before readout</div>
+  <p class="section-intro">Structural calls timestamped on Zenodo before each trial reports. When a trial reads out, the card moves to retrospective with the score attached.</p>
+
+  <div class="report-grid">
+    {% for r in prospectives %}
+    {% include 'partials/report_card.html' %}
+    {% endfor %}
+  </div>
+  <p class="footnote">* Trial cost estimate: enrollment × $40K median per patient (oncology Phase 3, US sites, 2015–2017 cross-sectional analysis). Order-of-magnitude only.</p>
+  {% endif %}
+
+</div>
+{% endblock %}

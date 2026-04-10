@@ -1,0 +1,190 @@
+[
+  {
+    "slug": "expresso-melanoma-anti-pd1",
+    "type": "retrospective",
+    "trial_name": "EXPRESSO",
+    "title": "EXPRESSO — anti-PD-1 monotherapy in melanoma",
+    "deck": "240 melanoma patients across six published anti-PD-1 cohorts. The framework's structural call separates the responders the field tools cannot.",
+    "sponsor": "Multi-cohort meta-analysis",
+    "indication": "Metastatic melanoma",
+    "drug": "Anti-PD-1 monotherapy",
+    "phase": "Pooled retrospective",
+    "n": 240,
+    "trial_cost_estimate_usd_m": null,
+    "readout": "Published 2019–2022",
+
+    "prediction_call": "Held 21% · Past 48%",
+    "prediction_headline": "Encounter predicts a 27pp gap between Activation-held and Past-Activation patients, where PD-L1 separates only ~14pp.",
+
+    "result_observed": "Held 21.4% · Past 48.2%",
+    "result_delta": "+26.8 pp gap (p = 0.0002)",
+    "result_score": "HIT",
+    "result_note": "Leave-one-cohort-out CV: predicted held 22.2% (observed 21.4%, error 0.8pp); predicted past 49.4% (observed 48.2%, error 1.2pp).",
+
+    "zenodo_doi": null,
+    "date": "2026-04",
+    "status": "published"
+  },
+  {
+    "slug": "star-221-tigit-gastric",
+    "type": "retrospective",
+    "trial_name": "STAR-221",
+    "title": "STAR-221 — domvanalimab + zimberelimab + chemo in 1L gastric/GEJ",
+    "deck": "Phase 3 testing whether a TIGIT inhibitor adds anything to PD-1 + chemo in upper GI cancers. Discontinued for futility December 2025 — confirming the framework's pre-publication call.",
+    "sponsor": "Arcus Biosciences / Gilead Sciences",
+    "nct": "NCT05568095",
+    "indication": "1L gastric / GEJ / esophageal adenocarcinoma",
+    "drug": "Domvanalimab + zimberelimab + chemo vs nivolumab + chemo",
+    "phase": "Phase 3",
+    "n": 1050,
+    "trial_cost_estimate_usd_m": null,
+    "readout": "Discontinued Dec 2025",
+
+    "prediction_call": "FAIL",
+    "prediction_headline": "PFS HR 0.95–1.05 (flat); ORR Δ 0–3pp; no PD-L1 subgroup interaction.",
+
+    "result_observed": "Discontinued for futility at interim OS analysis",
+    "result_delta": "Domvanalimab combination did not improve OS vs nivolumab + chemo control",
+    "result_score": "HIT",
+    "result_note": "STAR-221 was discontinued December 12, 2025 following independent data monitoring committee review of prespecified interim OS analysis. Per Arcus: \"Patients in the domvanalimab-containing arm derived the same benefit as patients treated in the control arm.\" Eighth Phase 3 TIGIT trial to fail across four cancer types. The framework's structural call (FAIL — TIGIT and PD-1 occupy the same step) was published in v1 on April 3, 2026, but the trial had already been terminated four months earlier; this is therefore a pre-publication confirmation analogous to KeyVibe-006 and ceralasertib.",
+
+    "zenodo_doi": "10.5281/zenodo.19408510",
+    "date": "2026-04",
+    "status": "published"
+  },
+  {
+    "slug": "volga-bladder-periop",
+    "type": "prospective",
+    "trial_name": "VOLGA",
+    "title": "VOLGA — durvalumab + tremelimumab + enfortumab vedotin (bladder periop)",
+    "deck": "Phase 3 perioperative trial in cisplatin-ineligible muscle-invasive bladder cancer. Reads out April 2026.",
+    "sponsor": "AstraZeneca",
+    "nct": "NCT04960709",
+    "indication": "MIBC, cisplatin-ineligible",
+    "drug": "Durvalumab + tremelimumab + enfortumab vedotin",
+    "phase": "Phase 3",
+    "n": 830,
+    "trial_cost_estimate_usd_m": 33,
+    "readout": "April 2026",
+
+    "prediction_call": "WIN ≥20pp",
+    "prediction_headline": "pCR triplet ≥50% (likely 55–65%), pCR control ~25–30%, Δ ≥20pp, ctDNA clearance ≥70%.",
+
+    "result_observed": null,
+    "result_delta": null,
+    "result_score": null,
+    "result_note": null,
+
+    "zenodo_doi": "10.5281/zenodo.19408510",
+    "date": "2026-04",
+    "status": "published"
+  },
+  {
+    "slug": "harmony-melanoma-fianlimab",
+    "type": "prospective",
+    "trial_name": "Harmony Melanoma",
+    "title": "Harmony Melanoma — fianlimab + cemiplimab vs pembrolizumab in 1L melanoma",
+    "deck": "Phase 3 head-to-head testing whether adding LAG-3 to PD-1 covers a second step in the immune cycle. Includes a cemiplimab monotherapy arm — the cleanest possible test of the LAG-3 attribution. Enrollment closed; reads H2 2026.",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "nct": "NCT05352672",
+    "indication": "1L unresectable / metastatic melanoma",
+    "drug": "Fianlimab + cemiplimab vs pembrolizumab vs cemiplimab monotherapy",
+    "phase": "Phase 3",
+    "n": 1590,
+    "trial_cost_estimate_usd_m": 64,
+    "readout": "H2 2026",
+
+    "prediction_call": "WIN ~10pp",
+    "prediction_headline": "PFS HR 0.70–0.80; ORR experimental ~44% vs control ~34%; CR rate 20–25%; cemiplimab monotherapy arm clinically equivalent to pembrolizumab.",
+
+    "result_observed": null,
+    "result_delta": null,
+    "result_score": null,
+    "result_note": null,
+
+    "zenodo_doi": "10.5281/zenodo.19408510",
+    "date": "2026-04",
+    "status": "published"
+  },
+  {
+    "slug": "energize-bladder-periop",
+    "type": "prospective",
+    "trial_name": "ENERGIZE",
+    "title": "ENERGIZE — neoadjuvant chemo ± nivolumab ± linrodostat in cisplatin-eligible MIBC",
+    "deck": "Phase 3 testing whether IDO1 inhibition adds anything to PD-1 + chemo in cisplatin-eligible perioperative bladder cancer. Three-arm design produces the cleanest test of the coverage principle in any trial currently on the scorecard. Enrollment complete; reads ASCO 2026.",
+    "sponsor": "Bristol Myers Squibb",
+    "nct": "NCT03661320",
+    "indication": "Cisplatin-eligible MIBC, perioperative",
+    "drug": "Gemcitabine/cisplatin ± nivolumab ± linrodostat (IDO1)",
+    "phase": "Phase 3",
+    "n": 1200,
+    "trial_cost_estimate_usd_m": 48,
+    "readout": "ASCO 2026 (target)",
+
+    "prediction_call": "FAIL (IDO1 arm)",
+    "prediction_headline": "Arm B (gem/cis + nivo) > Arm A (gem/cis); Arm C (gem/cis + nivo + linrodostat) ≈ Arm B. Critical test = (B > A) AND (C ≈ B).",
+
+    "result_observed": null,
+    "result_delta": null,
+    "result_score": null,
+    "result_note": null,
+
+    "zenodo_doi": "10.5281/zenodo.19408510",
+    "date": "2026-04",
+    "status": "published"
+  },
+  {
+    "slug": "imbrave251-hcc-2l",
+    "type": "prospective",
+    "trial_name": "IMbrave251",
+    "title": "IMbrave251 — atezolizumab continuation with TKI in 2L HCC after atezo + bev",
+    "deck": "Phase 3 testing whether continuing atezolizumab with a TKI helps patients who progressed on first-line atezolizumab + bevacizumab. CONTACT-03 already showed that ICI rechallenge after ICI failure does not generate a new result. Active, not recruiting.",
+    "sponsor": "Hoffmann-La Roche",
+    "nct": "NCT04770896",
+    "indication": "2L HCC after atezolizumab + bevacizumab",
+    "drug": "Atezolizumab + (lenvatinib or sorafenib) vs (lenvatinib or sorafenib) alone",
+    "phase": "Phase 3",
+    "n": 554,
+    "trial_cost_estimate_usd_m": 22,
+    "readout": "Expected 2026",
+
+    "prediction_call": "FAIL",
+    "prediction_headline": "OS HR 0.90–1.10 (not significant); ORR Δ 0–5pp.",
+
+    "result_observed": null,
+    "result_delta": null,
+    "result_score": null,
+    "result_note": null,
+
+    "zenodo_doi": "10.5281/zenodo.19408510",
+    "date": "2026-04",
+    "status": "published"
+  },
+  {
+    "slug": "keylynk-012-nsclc-3",
+    "type": "prospective",
+    "trial_name": "KEYLYNK-012",
+    "title": "KEYLYNK-012 — pembrolizumab + CRT ± olaparib vs CRT + durvalumab in Stage III NSCLC",
+    "deck": "Phase 3 testing two questions at once: whether pembro + concurrent CRT followed by pembro beats CRT + durvalumab consolidation, and whether adding olaparib to the pembro consolidation arm helps in unselected NSCLC. KEYLYNK-008 (similar olaparib combination in metastatic squamous NSCLC) was already discontinued for futility April 2024. Active enrolling.",
+    "sponsor": "Merck",
+    "nct": "NCT04380636",
+    "indication": "Stage III NSCLC, unresectable",
+    "drug": "Pembro + CRT → pembro ± olaparib vs CRT → durvalumab",
+    "phase": "Phase 3",
+    "n": 870,
+    "trial_cost_estimate_usd_m": 35,
+    "readout": "July 2026 (target)",
+
+    "prediction_call": "FAIL (olaparib arm)",
+    "prediction_headline": "No PFS or OS benefit from adding olaparib to pembro consolidation in unselected population. Possible signal in HRD-positive subgroup if reported.",
+
+    "result_observed": null,
+    "result_delta": null,
+    "result_score": null,
+    "result_note": null,
+
+    "zenodo_doi": "10.5281/zenodo.19408510",
+    "date": "2026-04",
+    "status": "published"
+  }
+]
